@@ -17,7 +17,7 @@ module Commands
     end
 
     def perform?
-      robot.surface.include_x_y?(x: params[:x], y: params[:y])
+      surface.include_x_y?(x: params[:x], y: params[:y])
     end
 
     def execute

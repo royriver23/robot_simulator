@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+require 'tty-prompt'
+require "bundler/setup"
+require 'robot_simulator'
+
+class String
+  def red;            "\e[31m#{self}\e[0m" end
+  def green;          "\e[32m#{self}\e[0m" end
+  def cyan;           "\e[36m#{self}\e[0m" end
+  def bold;           "\e[1m#{self}\e[22m" end
+  def underline;      "\e[4m#{self}\e[24m" end
+end
+
+
+prompt = TTY::Prompt.new(interrupt: :signal)
+
+puts "
+       _
+      [ ]
+     (   )
+      |>|
+   __/===\__
+  //| o=o |\\\\
+<]  | o=o |  [>
+    \=====/
+   / / | \\ \\
+  <_________>".cyan
+
+outputters = prompt.multi_select('Please select your report options ...'.bold.green.underline) do |menu|
+  menu.default 1
+  menu.choice "Plain Text ", 'plain_text'
+  menu.choice "JSON ", 'json'
+  menu.choice "ASCII", 'ascii'
+end
+
+report_on_every_command = prompt.yes?('Automatically report on every command?'.bold.green.underline)
+
+width = prompt.ask('Surface Width'.bold.green.underline, default: 5)
+height = prompt.ask('Surface Height'.bold.green.underline, default: 5)
+
+puts "
+All set! - Now, you will be able to control the robot using the following commands:
+- PLACE X,Y,\{DIRECTION} - e.g. PLACE 1,2,NORTH  - will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+- MOVE - will move the toy robot one unit forward in the direction it is currently facing.
+- LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
+- REPORT will announce the X,Y and orientation of the robot.
+"
+
+RobotSimulator.start(
+  outputters: outputters,
+  width: width,
+  height: height,
+  report_on_every_command: report_on_every_command
+)

@@ -16,7 +16,7 @@ module Commands
 
     def safe?
       (
-        robot.surface.include_x_y?(x: new_position[:new_x], y: new_position[:new_y])
+        surface.include_x_y?(x: new_position[:new_x], y: new_position[:new_y])
       ) || output_error('The movement is not safe, robot would fall from surface')
     end
 

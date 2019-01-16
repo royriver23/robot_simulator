@@ -4,11 +4,12 @@ require_relative 'errors/abstract_class_error'
 module Commands
   class CommandTemplate
     include CommandError
-    attr_accessor :params, :robot
+    attr_accessor :params, :robot, :surface
 
-    def initialize(params:, robot:)
+    def initialize(params:, robot:, surface:)
       self.params = Hash[*[self.class.PARAMS_CONFIG, params].transpose.flatten(1)]
       self.robot = robot
+      self.surface = surface
     end
 
     def perform?
