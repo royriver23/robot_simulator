@@ -1,11 +1,17 @@
-module Outputters
-  class StdOutOutputter < BaseOutputter
-    def print
-      "#{robot.x},#{robot.y},#{robot.orientation}"
-    end
+require_relative 'base_outputter'
 
-    def error(error)
-      error
+module RobotSimulator
+  module Outputters
+    class PlainTextOutputter < BaseOutputter
+      def report
+        puts "\n"
+        puts "#{robot.x},#{robot.y},#{robot.orientation}"
+        puts "\n"
+      end
+
+      def error(error)
+        puts error
+      end
     end
   end
 end

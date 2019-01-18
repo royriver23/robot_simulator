@@ -1,13 +1,22 @@
-module Commands
-  class Report < CommandTemplate
-    def perform?
-      true
-    end
+require_relative 'command_template'
+require 'robot_simulator/factories/outputter_factory'
 
-    def print
-      # Use global outputters
-    end
+module RobotSimulator
+  module Commands
+    class Report < CommandTemplate
+      PARAMS_CONFIG = [].freeze
 
-    alias execute print
+      def perform?
+        robot.placed ? true : Errors::CommandError.output_error('Robot must be placed in surface first')
+      end
+
+      def report
+        $OUTPUTTERS.each do |outputter|
+          OutputterFactory.get_outputter(outputter, robot: robot, surface: surface).report
+        end
+      end
+
+      alias perform report
+    end
   end
 end

@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "robot_simulator"
+require 'robot_simulator/string_format'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -11,4 +12,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.filter_run :focus
+  config.run_all_when_everything_filtered = true
 end
+
+Dir['./spec/support/**/*.rb'].each { |f| require f }

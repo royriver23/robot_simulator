@@ -2,15 +2,7 @@
 require 'tty-prompt'
 require "bundler/setup"
 require 'robot_simulator'
-
-class String
-  def red;            "\e[31m#{self}\e[0m" end
-  def green;          "\e[32m#{self}\e[0m" end
-  def cyan;           "\e[36m#{self}\e[0m" end
-  def bold;           "\e[1m#{self}\e[22m" end
-  def underline;      "\e[4m#{self}\e[24m" end
-end
-
+require 'robot_simulator/string_format'
 
 prompt = TTY::Prompt.new(interrupt: :signal)
 
@@ -35,8 +27,15 @@ end
 
 report_on_every_command = prompt.yes?('Automatically report on every command?'.bold.green.underline)
 
-width = prompt.ask('Surface Width'.bold.green.underline, default: 5)
-height = prompt.ask('Surface Height'.bold.green.underline, default: 5)
+width = prompt.ask('Surface Width:'.bold.green.underline) do |q|
+  q.default '5'
+  q.validate /^[-+]?[0-9]([0-9]*)?$/
+end
+
+height = prompt.ask('Surface Height:'.bold.green.underline) do |q|
+  q.default '5'
+  q.validate /^[-+]?[0-9]([0-9]*)?$/
+end
 
 puts "
 All set! - Now, you will be able to control the robot using the following commands:
@@ -44,6 +43,7 @@ All set! - Now, you will be able to control the robot using the following comman
 - MOVE - will move the toy robot one unit forward in the direction it is currently facing.
 - LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
 - REPORT will announce the X,Y and orientation of the robot.
+- EXIT
 "
 
 RobotSimulator.start(
