@@ -1,43 +1,81 @@
 # RobotSimulator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/robot_simulator`. To experiment with that code, run `bin/console` for an interactive prompt.
+**Robot Simulator** is an gem that will allow you to play around with robot via your terminal (your robot will actually move while being in another secret place in the planet).
 
-TODO: Delete this and the text above, and describe your gem
+## Setup and testing
 
-## Installation
+### Prerequisites
+* Ruby 2.0.0 or latest
 
-Add this line to your application's Gemfile:
 
-```ruby
-gem 'robot_simulator'
+### Installation
+
+First of all, clone this repository in your local machine:
+
+```bash
+git clone git@github.com:royriver23/robot_simulator.git
+cd robot_simulator
 ```
 
-And then execute:
+Then, make sure you have installed Ruby in your machine. The following command should return something like: `ruby 2.x.xpXX (YYY-MM-DD revision XXXX) [x86_64-darwin17]`
 
-    $ bundle
+```bash
+ruby -v
+```
 
-Or install it yourself as:
+As a reminder you can manage multiple Ruby versions using [Rbenv](https://github.com/rbenv/rbenv) or [RVM](https://rvm.io/).
 
-    $ gem install robot_simulator
+Verify that you have bundler installed. It would output something like `Bundler version x.xx.x`
 
-## Usage
+```bash
+bundler -v
+```
 
-TODO: Write usage instructions here
+If not, install it using `gem install bundler`
 
-## Development
+Finally, install your development dependencies:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+bundle install
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Running Tests
 
-## Contributing
+This gem has 100% of its implementation code covered by tests based on SimpleCov gem results:
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/robot_simulator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+<img src="https://github.com/royriver23/robot_simulator/blob/master/images/Coverage.png?raw=true" alt="drawing" width="350"/>
 
-## License
+## Let's play with the robot
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+There is a bash script that will start the robot simulator application, run the following command to load CLI interface to manage it:
 
-## Code of Conduct
+```
+./bin/robot_simulator
+```
 
-Everyone interacting in the RobotSimulator project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/robot_simulator/blob/master/CODE_OF_CONDUCT.md).
+### Configuration
+
+You will be able to do the following configurations:
+* **Output options**: Plain Text (default), JSON and/or ASCCI.
+* **Report on every command**: This is a yes or no question, to whether you would like to see robot status every time it performs an action.
+* **Surface**: Width and Height.
+
+### Instructions
+
+- PLACE X,Y,{DIRECTION} - e.g. PLACE 1,2,NORTH  - will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+- MOVE - will move the toy robot one unit forward in the direction it is currently facing.
+- LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
+- REPORT will announce the X,Y and orientation of the robot.
+- EXIT
+
+## Technologies/Patterns
+
+* **Programmming Language**: Ruby
+* **Testing**: [Rspec](http://rspec.info/)
+* **Design Principles**: [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
+* **Design Patterns**: some design patterns were used, such as: template and factory
+* **Test Patterns**: mainly [Arrange Act Assert](http://wiki.c2.com/?ArrangeActAssert), Result Test and State Test patterns.
+* **Other Gems**:
+  * [tty-prompt](https://github.com/piotrmurach/tty-prompt): to build CLI interface
+  * [simplecov](https://github.com/colszowka/simplecov): to measure code coverage
+  * [pry](https://github.com/pry/pry): extremely handy to debug bugs or just inspect and navigate throught your project.
