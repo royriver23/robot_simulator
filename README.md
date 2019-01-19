@@ -2,6 +2,10 @@
 
 **Robot Simulator** is an gem that will allow you to play around with robot via your terminal (your robot will actually move while being in another secret place in the planet).
 
+## Demo
+
+![RobotDemo](http://g.recordit.co/IXyBi11mnh.gif)
+
 ## Setup and testing
 
 ### Prerequisites
@@ -44,6 +48,24 @@ bundle install
 This gem has 100% of its implementation code covered by tests based on SimpleCov gem results:
 
 <img src="https://github.com/royriver23/robot_simulator/blob/master/images/Coverage.png?raw=true" alt="drawing" width="350"/>
+
+Run the tests with the following command:
+
+```bash
+./bin/rspec_robot
+```
+
+This will ask you whether you want to see detail coverage with a Y/N question:
+
+```bash
+Do you want to see detailed coverage? (Y/n)
+```
+
+If **Y**, it will open your default browser with coverage HTML file shown above in the screenshot.
+
+### Test Data
+
+The test data can be found in `./spec/test_data` folder.
 
 ## Let's play with the robot
 

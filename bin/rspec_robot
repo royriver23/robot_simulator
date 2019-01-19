@@ -10,5 +10,5 @@ prompt = TTY::Prompt.new(interrupt: :signal)
 
 see_coverage_file = prompt.yes? 'Do you want to see detailed coverage?'
 
-system('open', './coverage/index.html')
+system('open', './coverage/index.html') if see_coverage_file
 

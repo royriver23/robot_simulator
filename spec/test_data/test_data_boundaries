@@ -1,0 +1,14 @@
+move
+right
+left
+report
+place 324235,234543,north
+place 1,2,northWEST
+place
+move 1,2,north
+left 1,2,south
+right 1,2,west
+report 1,2,east
+place ,,
+place 1     ,    2   , NORTH
+move
