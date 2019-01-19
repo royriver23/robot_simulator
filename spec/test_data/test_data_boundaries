@@ -12,3 +12,5 @@ report 1,2,east
 place ,,
 place 1     ,    2   , NORTH
 move
+place NORTH,2,NORTH
+place #$#@$#,@#%%$,E
