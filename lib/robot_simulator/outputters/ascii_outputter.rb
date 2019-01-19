@@ -14,7 +14,9 @@ module RobotSimulator
         puts "\n"
       end
 
-      def error(_error); end
+      def error(error)
+        puts error
+      end
 
       private
 

@@ -5,7 +5,7 @@ module RobotSimulator
       def self.output_error(error)
         puts "\n[ERROR] Your command couldn't be performed: \n".red
         $OUTPUTTERS.each do |outputter|
-          OutputterFactory.get_outputter(outputter).error(error)
+          Factories::OutputterFactory.get_outputter(outputter).error(error)
           puts "\n\n"
         end
         false

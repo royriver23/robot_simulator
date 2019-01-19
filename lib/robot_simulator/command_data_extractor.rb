@@ -2,10 +2,9 @@ require_relative 'validators/command_validator'
 
 module RobotSimulator
   class CommandDataExtractor
-    attr_accessor :cli_data
+    attr_reader :cli_data
 
-    def initialize(command:, robot:)
-      @robot = robot
+    def initialize(command:)
       @command = command.squeeze(' ').strip
       extract_data
     end
@@ -17,7 +16,7 @@ module RobotSimulator
     private
 
     def extract_data
-      self.cli_data = {
+      @cli_data = {
         command_verb: command_verb,
         command_params: command_params,
         full_command: @command,

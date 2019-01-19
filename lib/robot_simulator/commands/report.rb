@@ -12,7 +12,7 @@ module RobotSimulator
 
       def report
         $OUTPUTTERS.each do |outputter|
-          OutputterFactory.get_outputter(outputter, robot: robot, surface: surface).report
+          Factories::OutputterFactory.get_outputter(outputter, robot: robot, surface: surface).report
         end
       end
 

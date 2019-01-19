@@ -22,7 +22,7 @@ module RobotSimulator
       end
 
       def command_class
-        CommandFactory.command_class(cli_data[:command_verb])
+        Factories::CommandFactory.command_class(cli_data[:command_verb])
       end
 
       def valid_number_of_params?
@@ -35,18 +35,11 @@ module RobotSimulator
         return true if command_class::PARAMS_CONFIG.empty?
         invalid_field = nil
         result = command_class::PARAMS_CONFIG.to_enum.with_index.all? do |field, index|
-          evaluate_abstraction(field)
           valid = command_class.send("#{field}_validation", cli_data[:command_params][index])
           invalid_field = field
           valid
         end
         result || Errors::CommandError.output_error("The #{invalid_field} value is not valid")
-      end
-
-      def evaluate_abstraction(field)
-        unless command_class.respond_to?("#{field}_validation")
-          raise NotImplementedError, 'Validation should be configured in command child class'
-        end
       end
     end
   end

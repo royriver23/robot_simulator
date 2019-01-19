@@ -1,4 +1,3 @@
-require 'pry'
 module RobotSimulator
   RSpec.describe Commands::Report do
     let(:robot) { double('robot', { x: 1, y: 2, orientation: 'NORTH', placed: true }) }
@@ -45,9 +44,9 @@ module RobotSimulator
       end
 
       it 'calls configured outputters' do
-        allow(OutputterFactory).to receive_message_chain(:get_outputter, :report)
+        allow(Factories::OutputterFactory).to receive_message_chain(:get_outputter, :report)
         subject.perform
-        expect(OutputterFactory).to have_received(:get_outputter).exactly($OUTPUTTERS.size).times
+        expect(Factories::OutputterFactory).to have_received(:get_outputter).exactly($OUTPUTTERS.size).times
       end
     end
   end

@@ -14,13 +14,15 @@ module RobotSimulator
       user_input = nil
       loop do
         print "> ".cyan
-        user_input = gets.chomp
-        break if user_input.downcase == 'exit'
-        cli = CommandDataExtractor.new(command: user_input, robot: @robot)
+        user_input = $stdin.gets&.chomp
+        break if user_input.nil? || user_input.downcase == 'exit'
+        cli = CommandDataExtractor.new(command: user_input)
         run_command(cli) if cli.valid?
         trigger_report if report?(user_input)
       end
     end
+
+    private
 
     def run_command(cli)
       params = {
@@ -28,12 +30,12 @@ module RobotSimulator
         robot: @robot,
         surface: @surface
       }
-      command = CommandFactory.instance(cli.cli_data[:command_verb], params)
+      command = Factories::CommandFactory.instance(cli.cli_data[:command_verb], params)
       command.perform? && command.perform
     end
 
     def trigger_report
-      cli = CommandDataExtractor.new(command: 'report', robot: @robot)
+      cli = CommandDataExtractor.new(command: 'report')
       run_command(cli) if cli.valid?
     end
 

@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'tty-prompt'
+require "bundler/setup"
+require 'robot_simulator'
+require 'robot_simulator/string_format'
+
+system 'rspec'
+
+prompt = TTY::Prompt.new(interrupt: :signal)
+
+see_coverage_file = prompt.yes? 'Do you want to see detailed coverage?'
+
+system('open', './coverage/index.html')
+

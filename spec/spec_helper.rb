@@ -1,6 +1,11 @@
 require "bundler/setup"
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter %r{^/spec/}
+end
+
 require "robot_simulator"
-require 'robot_simulator/string_format'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
